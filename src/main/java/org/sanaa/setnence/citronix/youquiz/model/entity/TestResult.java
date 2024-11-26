@@ -11,7 +11,7 @@ public class TestResult {
     private Long id;
 
     @ManyToOne
-    private Test test;
+    private Quiz test;
 
     @ManyToOne
     private Student student;

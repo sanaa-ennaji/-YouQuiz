@@ -23,5 +23,5 @@ public class Trainer {
     private String specialty;
 
     @OneToMany(mappedBy = "trainer")
-    private List<Test> tests;
+    private List<Quiz> tests;
 }

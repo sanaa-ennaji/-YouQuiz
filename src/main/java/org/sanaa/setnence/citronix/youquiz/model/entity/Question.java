@@ -1,11 +1,16 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.sanaa.setnence.citronix.youquiz.model.enums.QuestionType;
 
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 public class Question {
@@ -26,5 +31,5 @@ public class Question {
     private Subject subject;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Answer> answers;
+    private List<QuestionAnswer> questionAnswers;
 }

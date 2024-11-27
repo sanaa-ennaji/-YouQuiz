@@ -1,25 +1,22 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Answer {
-
+public class QuestionAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 1000)
-    private String text;
-
-    private boolean isCorrect;
+    @ManyToOne
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
 
     @ManyToOne
-    private Question question;
+    @JoinColumn(name = "answer_id", nullable = false)
+    private Answer answer;
+
+    private int points;
 }

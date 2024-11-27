@@ -20,7 +20,7 @@ public class Question {
     @Enumerated(EnumType.STRING)
     private QuestionType type;
 
-    private int points;
+    private int correctAnswers;
 
     @ManyToOne
     private Subject subject;

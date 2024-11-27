@@ -16,6 +16,8 @@ import java.util.List;
 public class Trainer extends User {
 
     private String specialty;
+    @OneToMany
+    @JoinColumn(name = "quiz_id", nullable = false)
     private List<Quiz> quiz;
 
 }

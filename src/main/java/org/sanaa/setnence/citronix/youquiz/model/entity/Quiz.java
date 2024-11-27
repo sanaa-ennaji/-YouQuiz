@@ -20,7 +20,9 @@ public class Quiz {
     private int passingScore;
     private Boolean canSeeAnswers;
     private Boolean canSeeResult;
+    @NotNull
     private int chances;
+    @NotNull
     @Column(length = 1000)
     private String remark ;
 

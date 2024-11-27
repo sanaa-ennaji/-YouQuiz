@@ -20,7 +20,6 @@ public class QuizAssignment {
     private String reason;
     @NotNull
     private LocalDate startDate;
-    //@Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private LocalDate endDate;
     private int score ;

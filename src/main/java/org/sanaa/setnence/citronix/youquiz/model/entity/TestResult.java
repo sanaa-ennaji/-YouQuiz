@@ -1,22 +1,26 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class TestResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private int attemptNumber;
+    private int score;
+    private boolean passed;
 
     @ManyToOne
     private Quiz test;
 
     @ManyToOne
     private Student student;
-
-    private int attemptNumber;
-    private int score;
-    private boolean passed;
 }

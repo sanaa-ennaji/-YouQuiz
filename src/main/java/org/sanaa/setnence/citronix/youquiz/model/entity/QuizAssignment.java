@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,6 +25,7 @@ public class QuizAssignment {
     private LocalDate endDate;
     private int score ;
     private int result ;
-
-
+    @ManyToMany
+    @JoinColumn(name = "answerValidation_id", nullable = false)
+    private List<AnswerValidation> answerValidation;
 }

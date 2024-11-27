@@ -26,4 +26,8 @@ public class Quiz {
     @Column(length = 1000)
     private String remark ;
 
+    @ManyToOne
+    @JoinColumn(name = "trainer_id")
+    private  Trainer trainer ;
+
 }

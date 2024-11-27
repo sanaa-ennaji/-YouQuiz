@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,6 +22,6 @@ public class Answer {
 
     private boolean isCorrect;
 
-    @ManyToOne
-    private Question question;
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
+    private List<QuestionAnswer>  questionAnswers;
 }

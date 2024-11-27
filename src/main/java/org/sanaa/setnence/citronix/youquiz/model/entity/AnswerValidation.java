@@ -16,7 +16,6 @@ public class AnswerValidation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private  int points;
 
 }

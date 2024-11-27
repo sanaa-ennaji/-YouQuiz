@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
@@ -14,5 +16,6 @@ import lombok.NoArgsConstructor;
 public class Trainer extends User {
 
     private String specialty;
+    private List<Quiz> quiz;
 
 }

@@ -18,7 +18,11 @@ public class AnswerValidation {
     private  int points;
 
     @ManyToMany
-    @JoinColumn(name = "quizAssignment_id", nullable = false)
+    @JoinTable(
+            name = "answer_validation_quiz_assignment",
+            joinColumns = @JoinColumn(name = "answer_validation_id"),
+            inverseJoinColumns = @JoinColumn(name = "quiz_assignment_id")
+    )
     private List<QuizAssignment> quizAssignment;
 
     @ManyToOne

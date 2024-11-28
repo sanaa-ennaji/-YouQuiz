@@ -21,8 +21,9 @@ public class Student extends User {
 
     private LocalDate enrollmentDate;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<QuizAssignment> quizAssignment ;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<QuizAssignment> quizAssignment;
+
 
 
 }

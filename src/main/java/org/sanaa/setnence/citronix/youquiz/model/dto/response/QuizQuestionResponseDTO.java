@@ -12,4 +12,6 @@ import java.time.Duration;
 public class QuizQuestionResponseDTO {
     private Long id;
     private Duration timer;
+    private long QuestionId ;
+    private long QuizId;
 }

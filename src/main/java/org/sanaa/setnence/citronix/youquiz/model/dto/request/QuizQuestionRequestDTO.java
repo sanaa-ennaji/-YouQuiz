@@ -11,4 +11,6 @@ import java.time.Duration;
 @AllArgsConstructor
 public class QuizQuestionRequestDTO {
     private Duration timer;
+    private long QuestionId ;
+    private long QuizId;
 }

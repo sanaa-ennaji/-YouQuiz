@@ -1,4 +1,4 @@
 package org.sanaa.setnence.citronix.youquiz.model.dto.request;
 
-public class QuestionAnswerRequest {
+public class QuestionRequestDTO {
 }

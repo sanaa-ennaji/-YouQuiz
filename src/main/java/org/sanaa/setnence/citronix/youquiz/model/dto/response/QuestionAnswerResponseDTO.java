@@ -1,4 +1,4 @@
 package org.sanaa.setnence.citronix.youquiz.model.dto.response;
 
-public class QuestionAnswerResponse {
+public class QuestionAnswerResponseDTO {
 }

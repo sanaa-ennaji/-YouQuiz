@@ -40,6 +40,6 @@ public class Question {
     private Level level;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<AnswerValidation> answerValidation ;
+    private List<AnswerValidation> answerValidation;
 }
 

@@ -1,16 +1,13 @@
-package org.sanaa.setnence.citronix.youquiz.model.dto.response;
+package org.sanaa.setnence.citronix.youquiz.model.dto.embedded;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.sanaa.setnence.citronix.youquiz.model.dto.embedded.QuizQuestionEmbeddedDTO;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizResponseDTO {
+public class QuizEmbeddedDTO {
     private Long id;
     private String title;
     private int passingScore;
@@ -18,6 +15,4 @@ public class QuizResponseDTO {
     private Boolean canSeeResult;
     private int chances;
     private String remark;
-    private long TrainerId;
-    private List<QuizQuestionEmbeddedDTO> quizQuestionEmbeddedDTO ;
 }

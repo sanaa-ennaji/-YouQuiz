@@ -13,12 +13,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstName;
     private String lastName;
-
     @Temporal(TemporalType.DATE)
     private LocalDate birthDate;
-
     private String address;
 }

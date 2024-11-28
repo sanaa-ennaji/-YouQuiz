@@ -10,4 +10,7 @@ import lombok.NoArgsConstructor;
 public class QuestionAnswerResponseDTO {
     private Long id;
     private int points;
+    private long questionId;
+    private long answerId;
+
 }

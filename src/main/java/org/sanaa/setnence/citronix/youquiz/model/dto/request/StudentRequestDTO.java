@@ -10,6 +10,6 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentRequest extends UserRequestDTO {
+public class StudentRequestDTO extends UserRequestDTO {
     private LocalDate enrollmentDate;
 }

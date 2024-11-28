@@ -3,7 +3,8 @@ package org.sanaa.setnence.citronix.youquiz.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 @Data
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -17,7 +18,7 @@ public class User {
     private String lastName;
 
     @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     private String address;
 }

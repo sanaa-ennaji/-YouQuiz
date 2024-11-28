@@ -1,13 +1,12 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +20,7 @@ public class Level {
     private String description;
     private int minPoints;
     private int maxPoints;
+
+    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL)
+    private List<Question> question ;
 }

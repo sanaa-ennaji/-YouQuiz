@@ -31,4 +31,15 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<QuestionAnswer> questionAnswers;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<QuizQuestion> quizQuestion ;
+
+    @ManyToOne
+    @JoinColumn(name = "level_id")
+    private Level level;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<AnswerValidation> answerValidation ;
 }
+

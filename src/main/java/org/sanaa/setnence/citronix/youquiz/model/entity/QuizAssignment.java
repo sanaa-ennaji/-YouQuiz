@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -28,4 +27,8 @@ public class QuizAssignment {
     @ManyToMany
     @JoinColumn(name = "answerValidation_id", nullable = false)
     private List<AnswerValidation> answerValidation;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student ;
 }

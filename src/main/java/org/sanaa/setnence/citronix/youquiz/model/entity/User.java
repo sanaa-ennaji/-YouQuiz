@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
-
+@Data
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {

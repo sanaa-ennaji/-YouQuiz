@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -30,4 +32,6 @@ public class Quiz {
     @JoinColumn(name = "trainer_id")
     private  Trainer trainer ;
 
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    private List<QuizQuestion> quizQuestion ;
 }

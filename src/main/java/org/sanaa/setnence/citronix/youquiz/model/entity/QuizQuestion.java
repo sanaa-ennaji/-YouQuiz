@@ -16,4 +16,12 @@ public class QuizQuestion {
     @Temporal(TemporalType.TIMESTAMP)
     private Integer timer;
 
+    @ManyToOne
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
+
+    @ManyToOne
+    @JoinColumn(name = "quiz_id", nullable = false)
+    private Quiz quiz ;
+
 }

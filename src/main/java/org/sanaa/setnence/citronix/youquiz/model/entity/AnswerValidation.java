@@ -21,4 +21,8 @@ public class AnswerValidation {
     @JoinColumn(name = "quizAssignment_id", nullable = false)
     private List<QuizAssignment> quizAssignment;
 
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question ;
+
 }

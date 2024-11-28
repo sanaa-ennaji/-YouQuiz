@@ -1,6 +1,7 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class Answer {
 
     @Column(length = 1000)
     private String text;
-
+    @NotNull
     private boolean isCorrect;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)

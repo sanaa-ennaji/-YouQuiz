@@ -3,6 +3,9 @@ package org.sanaa.setnence.citronix.youquiz.model.dto.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.sanaa.setnence.citronix.youquiz.model.dto.embedded.QuestionAnswerEmbeddedDTO;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -11,4 +14,5 @@ public class AnswerResponseDTO {
     private Long id;
     private String text;
     private boolean isCorrect;
+    private List<QuestionAnswerEmbeddedDTO> questionAnswers;
 }

@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class AnswerRequestDTO {
     private String text;
     private boolean isCorrect;
+
 }

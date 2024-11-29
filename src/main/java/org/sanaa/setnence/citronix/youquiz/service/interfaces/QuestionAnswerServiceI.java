@@ -4,5 +4,5 @@ import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuestionRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuestionResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Question;
 
-public interface QuestionServiceeI extends GenericServiceI<Question, QuestionRequestDTO, QuestionResponseDTO>  {
+public interface QuestionAnswerServiceI extends GenericServiceI<Question, QuestionRequestDTO, QuestionResponseDTO>  {
 }

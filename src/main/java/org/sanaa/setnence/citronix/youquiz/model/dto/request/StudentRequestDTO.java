@@ -1,5 +1,6 @@
 package org.sanaa.setnence.citronix.youquiz.model.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,5 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentRequestDTO extends UserRequestDTO {
+    @NotNull
     private LocalDate enrollmentDate;
 }

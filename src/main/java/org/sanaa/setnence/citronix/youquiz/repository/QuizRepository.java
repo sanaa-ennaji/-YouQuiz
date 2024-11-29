@@ -1,4 +1,7 @@
 package org.sanaa.setnence.citronix.youquiz.repository;
 
-public interface QuizRepository {
+import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface QuizRepository extends JpaRepository<Quiz, Long> {
 }

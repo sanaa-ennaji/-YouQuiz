@@ -20,4 +20,10 @@ public class QuizAssignmentRequestDTO {
     private LocalDate endDate;
     @NotNull(message = "student id can't be null")
     private Long studentId;
+    @NotNull(message = "quiz id can't be null")
+    private long quizId;
+    @NotNull(message = "score id can't be null")
+    private int score ;
+    @NotNull(message = "result id can't be null")
+    private int result ;
 }

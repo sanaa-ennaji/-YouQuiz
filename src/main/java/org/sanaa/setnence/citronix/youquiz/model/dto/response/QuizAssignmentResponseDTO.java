@@ -20,4 +20,5 @@ public class QuizAssignmentResponseDTO {
     private int result;
     private List<AnswerValidationEmbeddedDTO>  answerValidationEmbeddedDTO;
     private long studentId;
+    private long quizId;
 }

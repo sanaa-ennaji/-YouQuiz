@@ -27,6 +27,9 @@ public class QuizAssignment {
     @ManyToMany
     @JoinColumn(name = "answerValidation_id", nullable = false)
     private List<AnswerValidation> answerValidation;
+    @ManyToOne
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
 
     @ManyToOne
     @JoinColumn(name = "student_id")

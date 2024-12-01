@@ -1,27 +1,31 @@
+version: '3.8'
 
 services:
-  mysql:
-    image: mysql:8
-    container_name: mysql-container
+  postgres:
+    image: postgres:15
+    container_name: postgres-container
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: wrm
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: YouQuiz
     ports:
-      - "3306:3306"
+      - "5432:5432"
     networks:
       - app-network
 
   springboot-app:
-    build: .
-    container_name: springboot-app
+    build:
+      context: .
+    volumes:
+      - .:/app
     ports:
       - "8888:8888"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/wrm
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/wrm
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     depends_on:
-      - mysql
+      - postgres
     networks:
       - app-network
 

@@ -31,6 +31,7 @@ public class QuizService implements QuizServiceI {
 
     @Override
     public QuizResponseDTO update(Long id, QuizRequestDTO quizRequestDTO) {
+        Optional<Quiz> quiz  = quizRepository.findById(id);
         return null;
     }
 

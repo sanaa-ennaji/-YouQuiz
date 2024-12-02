@@ -46,11 +46,16 @@ public class TrainerService implements TrainerServiceI  {
 
     @Override
     public List<TrainerResponseDTO> findAll() {
-        return List.of();
+       return trainerRepository.findAll().stream()
+               .map(trainerMapper::toResponseDTO)
+               .toList();
     }
 
     @Override
     public void delete(Long id) {
-
+        if (!trainerRepository.existsById(id)){
+            throw new IllegalArgumentException("trainer not found with id :" + id);
+        }
+       trainerRepository.deleteById(id);
     }
 }

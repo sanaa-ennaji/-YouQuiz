@@ -1,6 +1,7 @@
 package org.sanaa.setnence.citronix.youquiz.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.TrainerRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.TrainerResponseDTO;
@@ -8,10 +9,7 @@ import org.sanaa.setnence.citronix.youquiz.service.impl.TrainerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/trainers")
@@ -25,6 +23,12 @@ public class TrainerController {
         TrainerResponseDTO trainerResponseDTO = trainerService.create(requestDTO);
         return new ResponseEntity<>(trainerResponseDTO, HttpStatus.CREATED);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<TrainerResponseDTO> update(@PathVariable Long id , @Valid TrainerRequestDTO requestDTO){
+        TrainerResponseDTO responseDTO = trainerService.update(id, requestDTO);
+        return ResponseEntity.ok(responseDTO);
+    }
+
 
 
 }

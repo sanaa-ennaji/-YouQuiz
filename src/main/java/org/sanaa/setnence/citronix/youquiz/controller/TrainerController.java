@@ -1,5 +1,6 @@
 package org.sanaa.setnence.citronix.youquiz.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,16 @@ public class TrainerController {
         return ResponseEntity.ok(responseDTO);
     }
 
-
-
+    @GetMapping
+    public ResponseEntity<TrainerResponseDTO> getById(@PathVariable Long id){
+        return trainerService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseThrow(()-> new EntityNotFoundException("trainer not found with id "+ id));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id ){
+        trainerService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

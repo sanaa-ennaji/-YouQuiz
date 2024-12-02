@@ -47,7 +47,10 @@ public class QuizService implements QuizServiceI {
 
     @Override
     public List<QuizResponseDTO> findAll() {
-        return List.of();
+        return quizRepository.findAll()
+                .stream()
+                .map(quizMapper::toResponseDTO)
+                .toList();
     }
 
     @Override

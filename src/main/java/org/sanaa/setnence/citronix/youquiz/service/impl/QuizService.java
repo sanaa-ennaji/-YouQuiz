@@ -41,7 +41,8 @@ public class QuizService implements QuizServiceI {
 
     @Override
     public Optional<QuizResponseDTO> findById(Long id) {
-        return Optional.empty();
+        return quizRepository.findById(id)
+                .map(quizMapper::toResponseDTO);
     }
 
     @Override

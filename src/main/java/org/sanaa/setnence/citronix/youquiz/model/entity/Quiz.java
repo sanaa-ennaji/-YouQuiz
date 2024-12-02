@@ -17,23 +17,27 @@ public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotNull
     private String title;
     private int passingScore;
     private Boolean canSeeAnswers;
     private Boolean canSeeResult;
+
     @NotNull
     private int chances;
+
     @NotNull
     @Column(length = 1000)
-    private String remark ;
+    private String remark;
 
     @ManyToOne
     @JoinColumn(name = "trainer_id")
-    private  Trainer trainer ;
+    private Trainer trainer;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
-    private List<QuizQuestion> quizQuestion ;
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<QuizQuestion> quizQuestion;
+
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<QuizAssignment> quizAssignment;
 }

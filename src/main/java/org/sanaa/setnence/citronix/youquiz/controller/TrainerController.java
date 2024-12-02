@@ -8,6 +8,7 @@ import org.sanaa.setnence.citronix.youquiz.service.impl.TrainerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TrainerController {
     private final TrainerService trainerService;
 
+    @PostMapping
     public ResponseEntity<TrainerResponseDTO>  create(@Valid @RequestBody TrainerRequestDTO requestDTO){
         TrainerResponseDTO trainerResponseDTO = trainerService.create(requestDTO);
         return new ResponseEntity<>(trainerResponseDTO, HttpStatus.CREATED);

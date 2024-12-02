@@ -1,6 +1,5 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -19,13 +17,18 @@ public class QuizAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String reason;
+
     @NotNull
     private LocalDate startDate;
+
     @NotNull
     private LocalDate endDate;
-    private int score ;
-    private int result ;
+
+    private int score;
+
+    private int result;
 
     @ManyToMany
     @JoinTable(
@@ -35,12 +38,11 @@ public class QuizAssignment {
     )
     private List<AnswerValidation> answerValidation;
 
-
     @ManyToOne
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private Student student ;
+    private Student student;
 }

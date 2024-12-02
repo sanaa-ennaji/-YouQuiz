@@ -2,6 +2,7 @@ package org.sanaa.setnence.citronix.youquiz.model.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ public class UserRequestDTO {
     private String firstName;
     @NotNull(message = "lastname can't be null ")
     private String lastName;
-    @NotBlank
+    @Past(message = "birthdate should be in the past")
     private LocalDate birthDate;
     @NotNull
     private String address;

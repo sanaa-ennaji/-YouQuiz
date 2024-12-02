@@ -24,8 +24,9 @@ public class QuizService implements QuizServiceI {
 
     @Override
     public QuizResponseDTO create(QuizRequestDTO quizRequestDTO) {
-        Quiz  quiz = quizMapper.
-        return null;
+        Quiz  quiz = quizMapper.toEntity(quizRequestDTO);
+        Quiz savedQuiz = quizRepository.save(quiz);
+        return  quizMapper.toResponseDTO(savedQuiz);
     }
 
     @Override

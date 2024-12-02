@@ -30,7 +30,12 @@ public class TrainerService implements TrainerServiceI  {
 
     @Override
     public TrainerResponseDTO update(Long id, TrainerRequestDTO trainerRequestDTO) {
-        return null;
+        Trainer trainer = trainerRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Trainer not found with id : " + id));
+        trainerMapper.updateEntityFromDTO(trainerRequestDTO , trainer);
+        Trainer updatedTrainer = trainerRepository.save(trainer);
+        return trainerMapper.toResponseDTO(updatedTrainer);
+
     }
 
     @Override

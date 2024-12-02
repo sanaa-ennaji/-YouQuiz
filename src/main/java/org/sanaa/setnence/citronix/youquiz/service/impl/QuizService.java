@@ -1,5 +1,6 @@
 package org.sanaa.setnence.citronix.youquiz.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuizRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuizResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
@@ -31,8 +32,11 @@ public class QuizService implements QuizServiceI {
 
     @Override
     public QuizResponseDTO update(Long id, QuizRequestDTO quizRequestDTO) {
-        Optional<Quiz> quiz  = quizRepository.findById(id);
-        return null;
+        Quiz quiz  = quizRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Quiz not found with ID: " + id));
+         quizMapper.updateEntityFromRequest(quizRequestDTO , quiz);
+         Quiz updatedQuiz = quizRepository.save(quiz);
+        return quizMapper.toResponseDTO(updatedQuiz);
     }
 
     @Override

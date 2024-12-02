@@ -55,6 +55,9 @@ public class QuizService implements QuizServiceI {
 
     @Override
     public void delete(Long id) {
-
+        if(!quizRepository.existsById(id)){
+            throw new  EntityNotFoundException("Quiz not found with ID: " + id);
+        }
+      quizRepository.deleteById(id);
     }
 }

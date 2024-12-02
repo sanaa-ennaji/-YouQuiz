@@ -1,5 +1,6 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,13 +18,10 @@ public class AnswerValidation {
     private Long id;
     private  int points;
 
-    @ManyToMany
-    @JoinTable(
-            name = "answer_validation_quiz_assignment",
-            joinColumns = @JoinColumn(name = "answer_validation_id"),
-            inverseJoinColumns = @JoinColumn(name = "quiz_assignment_id")
-    )
+    @ManyToMany(mappedBy = "answerValidation")
+    @JsonBackReference
     private List<QuizAssignment> quizAssignment;
+
 
     @ManyToOne
     @JoinColumn(name = "question_id")

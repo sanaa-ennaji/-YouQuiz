@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -24,9 +25,15 @@ public class QuizAssignment {
     private LocalDate endDate;
     private int score ;
     private int result ;
+
     @ManyToMany
-    @JoinColumn(name = "answerValidation_id", nullable = false)
+    @JoinTable(
+            name = "quiz_assignment_answer_validation",
+            joinColumns = @JoinColumn(name = "quiz_assignment_id"),
+            inverseJoinColumns = @JoinColumn(name = "answer_validation_id")
+    )
     private List<AnswerValidation> answerValidation;
+
     @ManyToOne
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;

@@ -40,7 +40,8 @@ public class TrainerService implements TrainerServiceI  {
 
     @Override
     public Optional<TrainerResponseDTO> findById(Long id) {
-        return Optional.empty();
+        return trainerRepository.findById(id)
+                .map(trainerMapper::toResponseDTO);
     }
 
     @Override

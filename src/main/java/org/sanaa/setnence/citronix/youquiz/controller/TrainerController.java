@@ -24,10 +24,11 @@ public class TrainerController {
         return new ResponseEntity<>(trainerResponseDTO, HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<TrainerResponseDTO> update(@PathVariable Long id , @Valid TrainerRequestDTO requestDTO){
+    public ResponseEntity<TrainerResponseDTO> update(@PathVariable Long id, @Valid @RequestBody  TrainerRequestDTO requestDTO){
         TrainerResponseDTO responseDTO = trainerService.update(id, requestDTO);
         return ResponseEntity.ok(responseDTO);
     }
+
 
 
 

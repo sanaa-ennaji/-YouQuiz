@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/trainers")
 @Validated
@@ -28,12 +30,17 @@ public class TrainerController {
         TrainerResponseDTO responseDTO = trainerService.update(id, requestDTO);
         return ResponseEntity.ok(responseDTO);
     }
-
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<TrainerResponseDTO> getById(@PathVariable Long id){
         return trainerService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseThrow(()-> new EntityNotFoundException("trainer not found with id "+ id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TrainerResponseDTO>> getAll(){
+        List<TrainerResponseDTO> trainers = trainerService.findAll();
+        return ResponseEntity.ok(trainers);
     }
 
     @DeleteMapping("/{id}")

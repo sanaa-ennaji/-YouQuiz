@@ -1,5 +1,6 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ public class QuizAssignment {
             inverseJoinColumns = @JoinColumn(name = "answer_validation_id")
     )
     private List<AnswerValidation> answerValidation;
+
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")

@@ -19,9 +19,7 @@ public class AnswerValidation {
     private  int points;
 
     @ManyToMany(mappedBy = "answerValidation")
-    @JsonBackReference
     private List<QuizAssignment> quizAssignment;
-
 
     @ManyToOne
     @JoinColumn(name = "question_id")

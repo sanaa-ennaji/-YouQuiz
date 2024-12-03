@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.sanaa.setnence.citronix.youquiz.repository.AnswerRepository;
 
 @RequiredArgsConstructor
-public class AnswerValidation {
+public class AnswerValidationController {
     private final AnswerRepository  answerRepository;
 
 

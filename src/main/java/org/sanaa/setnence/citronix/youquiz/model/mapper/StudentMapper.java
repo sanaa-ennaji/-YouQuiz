@@ -1,6 +1,7 @@
 package org.sanaa.setnence.citronix.youquiz.model.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.StudentRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.StudentResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Student;
@@ -14,4 +15,5 @@ public interface StudentMapper {
     Student toEntity (StudentRequestDTO requestDTO);
     List<StudentResponseDTO> toResponseDTOList(List<Student> entities);
     List<Student> toEntityList(List<StudentResponseDTO> requestDTOs);
+    void updateEntityFromRequest(StudentRequestDTO studentRequestDTO, @MappingTarget Student student);
 }

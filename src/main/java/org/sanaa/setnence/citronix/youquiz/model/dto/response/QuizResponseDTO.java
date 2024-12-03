@@ -18,6 +18,6 @@ public class QuizResponseDTO {
     private Boolean canSeeResult;
     private int chances;
     private String remark;
-    private long TrainerId;
+    private long trainerId;
     private List<QuizQuestionEmbeddedDTO> quizQuestionEmbeddedDTO ;
 }

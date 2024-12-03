@@ -48,5 +48,4 @@ public class TrainerController {
         trainerService.delete(id);
         return ResponseEntity.ok("trainer was deleted");
     }
-
 }

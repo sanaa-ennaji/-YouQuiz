@@ -1,5 +1,6 @@
 package org.sanaa.setnence.citronix.youquiz.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.TrainerRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.TrainerResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Trainer;
@@ -57,5 +58,10 @@ public class TrainerService implements TrainerServiceI  {
             throw new IllegalArgumentException("trainer not found with id :" + id);
         }
        trainerRepository.deleteById(id);
+    }
+
+    public Trainer findEntityById(Long id) {
+        return trainerRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Trainer not found with ID: " + id));
     }
 }

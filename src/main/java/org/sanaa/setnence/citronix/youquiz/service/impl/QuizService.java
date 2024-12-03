@@ -4,7 +4,9 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuizRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuizResponseDTO;
+import org.sanaa.setnence.citronix.youquiz.model.dto.response.TrainerResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
+import org.sanaa.setnence.citronix.youquiz.model.entity.Trainer;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.QuizMapper;
 import org.sanaa.setnence.citronix.youquiz.repository.QuizRepository;
 import org.sanaa.setnence.citronix.youquiz.service.interfaces.QuizServiceI;
@@ -18,15 +20,21 @@ public class QuizService implements QuizServiceI {
 
     private final QuizRepository quizRepository;
     private final QuizMapper quizMapper;
+    private final TrainerService trainerService ;
 
-    public QuizService(QuizRepository quizRepository, QuizMapper quizMapper) {
+    public QuizService(QuizRepository quizRepository, QuizMapper quizMapper, TrainerService trainerService) {
         this.quizRepository = quizRepository;
         this.quizMapper = quizMapper;
+        this.trainerService = trainerService;
     }
 
     @Override
     public QuizResponseDTO create(QuizRequestDTO quizRequestDTO) {
-        Quiz  quiz = quizMapper.toEntity(quizRequestDTO);
+        Trainer trainer = trainerService.findEntityById(quizRequestDTO.getTrainerId());
+
+        Quiz quiz = quizMapper.toEntity(quizRequestDTO);
+        quiz.setTrainer(trainer);
+
         Quiz savedQuiz = quizRepository.save(quiz);
         return  quizMapper.toResponseDTO(savedQuiz);
     }

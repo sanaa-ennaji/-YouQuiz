@@ -1,6 +1,7 @@
 package org.sanaa.setnence.citronix.youquiz.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.constraints.NotNull;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.StudentRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.StudentResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Student;
@@ -62,5 +63,10 @@ public class StudentService implements StudentServiceI {
     @Override
     public void delete(Long id) {
         studentRepository.deleteById(id);
+    }
+
+    public Student findEntityById(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("student not found" + id));
     }
 }

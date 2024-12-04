@@ -64,4 +64,5 @@ public class TrainerService implements TrainerServiceI  {
         return trainerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Trainer not found with ID: " + id));
     }
+
 }

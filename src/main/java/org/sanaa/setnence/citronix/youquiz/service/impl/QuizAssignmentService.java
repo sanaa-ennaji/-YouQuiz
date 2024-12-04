@@ -4,6 +4,7 @@ import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuizAssignmentReque
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuizAssignmentResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
 import org.sanaa.setnence.citronix.youquiz.model.entity.QuizAssignment;
+import org.sanaa.setnence.citronix.youquiz.model.entity.Student;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.QuizAssignmentMapper;
 import org.sanaa.setnence.citronix.youquiz.repository.QuizAssignmentRepository;
 import org.sanaa.setnence.citronix.youquiz.service.interfaces.QuizAssignmentServiceI;
@@ -31,6 +32,7 @@ public class QuizAssignmentService implements QuizAssignmentServiceI {
     @Override
     public QuizAssignmentResponseDTO create(QuizAssignmentRequestDTO quizAssignmentRequestDTO) {
      Quiz quiz = quizService.findEntityById(quizAssignmentRequestDTO.getQuizId());
+     Student student = studentService.findEntityById(quizAssignmentRequestDTO.getQuizId());
         return null;
     }
 

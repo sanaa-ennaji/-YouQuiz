@@ -2,9 +2,9 @@ package org.sanaa.setnence.citronix.youquiz.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotNull;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuizRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuizResponseDTO;
-import org.sanaa.setnence.citronix.youquiz.model.dto.response.TrainerResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Trainer;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.QuizMapper;
@@ -68,5 +68,10 @@ public class QuizService implements QuizServiceI {
             throw new  EntityNotFoundException("Quiz not found with ID: " + id);
         }
       quizRepository.deleteById(id);
+    }
+
+    public Quiz findEntityById(Long id) {
+        return quizRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("quiz not found with id "+ id));
     }
 }

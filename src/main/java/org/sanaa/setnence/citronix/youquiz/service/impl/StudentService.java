@@ -1,7 +1,6 @@
 package org.sanaa.setnence.citronix.youquiz.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.constraints.NotNull;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.StudentRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.StudentResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Student;

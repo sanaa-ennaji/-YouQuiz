@@ -3,6 +3,7 @@ package org.sanaa.setnence.citronix.youquiz.service.impl;
 import jakarta.persistence.EntityNotFoundException;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.SubjectRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.SubjectResponseDTO;
+import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Subject;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.SubjectMapper;
 import org.sanaa.setnence.citronix.youquiz.repository.SubjectRepository;
@@ -57,5 +58,10 @@ public class SubjectService implements SubjectServiceI {
     @Override
     public void delete(Long id) {
         subjectRepository.deleteById(id);
+    }
+
+    public Subject findEntityById(Long id) {
+        return subjectRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("subject not found with id "+ id));
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/QuizAssignments")
+@RequestMapping("/api/v1/quizAssignments")
 @Validated
 @RequiredArgsConstructor
 public class QuizAssingmentController {

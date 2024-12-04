@@ -52,16 +52,23 @@ public class QuizAssignmentService implements QuizAssignmentServiceI {
 
     @Override
     public Optional<QuizAssignmentResponseDTO> findById(Long id) {
-        return Optional.empty();
+        return quizAssignmentRepository.findById(id)
+                .map(quizAssignmentMapper::toResponseDTO);
     }
 
     @Override
     public List<QuizAssignmentResponseDTO> findAll() {
-        return List.of();
+        return quizAssignmentRepository.findAll()
+                .stream()
+                .map(quizAssignmentMapper::toResponseDTO)
+                .toList();
     }
 
     @Override
     public void delete(Long id) {
-
+        if(!quizAssignmentRepository.existsById(id)){
+            throw new EntityNotFoundException("quizAssignment not found with id " +id);
+        }
+     quizAssignmentRepository.deleteById(id);
     }
 }

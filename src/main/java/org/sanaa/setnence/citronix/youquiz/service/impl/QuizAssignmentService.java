@@ -2,6 +2,7 @@ package org.sanaa.setnence.citronix.youquiz.service.impl;
 
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuizAssignmentRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuizAssignmentResponseDTO;
+import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
 import org.sanaa.setnence.citronix.youquiz.model.entity.QuizAssignment;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Student;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.QuizAssignmentMapper;
@@ -30,10 +31,13 @@ public class QuizAssignmentService implements QuizAssignmentServiceI {
 
     @Override
     public QuizAssignmentResponseDTO create(QuizAssignmentRequestDTO quizAssignmentRequestDTO) {
-        QuizAssignment quiz = quizService.findEntityById(quizAssignmentRequestDTO.getQuizId());
-     Student student = studentService.findEntityById(quizAssignmentRequestDTO.getQuizId());
-        QuizAssignmentMapper.updateEntityFromRequest(, )
-        return null;
+        Quiz quiz = quizService.findEntityById(quizAssignmentRequestDTO.getQuizId());
+     Student student = studentService.findEntityById(quizAssignmentRequestDTO.getStudentId());
+     QuizAssignment quizAssignment = quizAssignmentMapper.toEntity(quizAssignmentRequestDTO);
+        quizAssignment.setStudent(student);
+        quizAssignment.setQuiz(quiz);
+        QuizAssignment savedAssignment = quizAssignmentRepository.save(quizAssignment);
+        return quizAssignmentMapper.toResponseDTO(savedAssignment);
     }
 
     @Override

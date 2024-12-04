@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public class AnswerValidation {
     @JoinColumn(name = "question_id")
     private Question question ;
 
+    public void updateEntityFromRequest(AnswerValidation answerValidation,@MappingTarget AnswerValidation answerValidation1) {
+    }
 }

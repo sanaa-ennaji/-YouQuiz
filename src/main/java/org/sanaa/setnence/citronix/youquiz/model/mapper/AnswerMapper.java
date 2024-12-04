@@ -1,6 +1,7 @@
 package org.sanaa.setnence.citronix.youquiz.model.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.AnswerRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.AnswerResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Answer;
@@ -13,4 +14,6 @@ public interface AnswerMapper {
     Answer toEntity(AnswerRequestDTO requestDTO);
     List<AnswerResponseDTO> toResponseDTOList (List<Answer> entities);
     List<Answer> toEntityList(List<AnswerRequestDTO> requestDTOs);
+
+    void updateEntityFromRequest(AnswerRequestDTO answerRequestDTO,@MappingTarget Answer answer);
 }

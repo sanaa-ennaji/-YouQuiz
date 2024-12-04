@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.AnswerRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.AnswerResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Answer;
-import org.sanaa.setnence.citronix.youquiz.model.entity.Level;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.AnswerMapper;
 import org.sanaa.setnence.citronix.youquiz.repository.AnswerRepository;
 import org.sanaa.setnence.citronix.youquiz.service.interfaces.AnswerServiceI;

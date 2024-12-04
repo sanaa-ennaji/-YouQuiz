@@ -5,8 +5,6 @@ import org.sanaa.setnence.citronix.youquiz.model.dto.request.AnswerValidationReq
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.AnswerValidationResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.AnswerValidation;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Question;
-import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
-import org.sanaa.setnence.citronix.youquiz.model.entity.Trainer;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.AnswerValidationMapper;
 import org.sanaa.setnence.citronix.youquiz.repository.AnswerValidationRepository;
 import org.sanaa.setnence.citronix.youquiz.service.interfaces.AnsweValidationServiceI;
@@ -30,6 +28,7 @@ public class AnswerValidationService implements AnsweValidationServiceI {
     @Override
     public AnswerValidationResponseDTO create(AnswerValidationRequestDTO answerValidationRequestDTO) {
         Question question= questionService.findEntityById(answerValidationRequestDTO.getQuestionId());
+
 
         AnswerValidation answerValidation = answerValidationMapper.toEntity(answerValidationRequestDTO);
         answerValidation.setQuestion(question);

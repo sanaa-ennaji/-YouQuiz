@@ -1,11 +1,12 @@
 package org.sanaa.setnence.citronix.youquiz.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.mapstruct.MappingTarget;
+import org.sanaa.setnence.citronix.youquiz.model.dto.request.AnswerValidationRequestDTO;
+
 
 import java.util.List;
 
@@ -26,6 +27,4 @@ public class AnswerValidation {
     @JoinColumn(name = "question_id")
     private Question question ;
 
-    public void updateEntityFromRequest(AnswerValidation answerValidation,@MappingTarget AnswerValidation answerValidation1) {
-    }
 }

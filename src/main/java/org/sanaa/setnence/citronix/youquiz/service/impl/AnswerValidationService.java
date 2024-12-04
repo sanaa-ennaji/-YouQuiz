@@ -41,7 +41,7 @@ public class AnswerValidationService implements AnsweValidationServiceI {
     public AnswerValidationResponseDTO update(Long id, AnswerValidationRequestDTO answerValidationRequestDTO) {
         AnswerValidation answerValidation  = answerValidationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AnswerValidation not found with ID: " + id));
-        answerValidation.updateEntityFromRequest(answerValidation , answerValidation);
+        answerValidationMapper.updateEntityFromRequest(answerValidationRequestDTO , answerValidation);
         AnswerValidation updatedAnswerValidation = answerValidationRepository.save(answerValidation);
         return answerValidationMapper.toResponseDTO(updatedAnswerValidation);
     }
@@ -63,13 +63,13 @@ public class AnswerValidationService implements AnsweValidationServiceI {
     @Override
     public void delete(Long id) {
         if(!answerValidationRepository.existsById(id)){
-            throw new  EntityNotFoundException("answerValidation not found with ID: " + id);
+            throw new  EntityNotFoundException("answer validation not found with ID: " + id);
         }
         answerValidationRepository.deleteById(id);
 
     }
     public AnswerValidation findEntityById(Long id) {
         return answerValidationRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("answervalidation not found with id "+ id));
+                .orElseThrow(()-> new EntityNotFoundException("answer validation not found with id "+ id));
     }
 }

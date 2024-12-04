@@ -3,10 +3,6 @@ package org.sanaa.setnence.citronix.youquiz.model.dto.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.sanaa.setnence.citronix.youquiz.model.dto.embedded.QuizAssignmentEmbeddedDTO;
-
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +10,5 @@ import java.util.List;
 public class AnswerValidationResponseDTO {
     private Long id;
     private  int points;
-    private List<QuizAssignmentEmbeddedDTO> quizAssignmentEmbeddedDTO;
     private long questionId ;
 }

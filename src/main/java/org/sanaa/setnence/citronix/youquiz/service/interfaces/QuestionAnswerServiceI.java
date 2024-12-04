@@ -1,8 +1,17 @@
 package org.sanaa.setnence.citronix.youquiz.service.interfaces;
 
-import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuestionRequestDTO;
-import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuestionResponseDTO;
-import org.sanaa.setnence.citronix.youquiz.model.entity.Question;
+import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuestionAnswerRequestDTO;
+import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuestionAnswerResponseDTO;
 
-public interface QuestionAnswerServiceI extends GenericServiceI<Question, QuestionRequestDTO, QuestionResponseDTO>  {
+
+import java.util.List;
+import java.util.Optional;
+
+public interface QuestionAnswerServiceI {
+
+   QuestionAnswerResponseDTO create(QuestionAnswerRequestDTO questionAnswerRequestDTO) ;
+   Optional<QuestionAnswerResponseDTO> findById(Long id);
+   List<QuestionAnswerResponseDTO> findAll();
+   void delete(Long id) ;
 }
+

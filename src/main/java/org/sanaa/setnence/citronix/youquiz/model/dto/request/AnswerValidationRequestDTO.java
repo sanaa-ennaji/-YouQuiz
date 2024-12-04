@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnswerValidationRequestDTO {
-    private Long id;
     @Min(value = 0, message = "Points must be a non-negative value.")
     private  int points;
     @NotNull

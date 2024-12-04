@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class QuestionAnswerRequestDTO {
     @Min(value = 0, message = "Points must be a non-negative value.")
     private int points;
-    @NotNull(message = "question not must be not null")
+    @NotNull(message = "question answer not must be not null")
     private long questionId;
-    @NotNull(message = "question not must be not null")
+    @NotNull(message = "question answer not must be not null")
     private long answerId;
 
 }

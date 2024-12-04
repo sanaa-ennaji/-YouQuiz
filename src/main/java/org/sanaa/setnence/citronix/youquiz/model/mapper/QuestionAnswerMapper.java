@@ -17,5 +17,4 @@ public interface QuestionAnswerMapper {
     List<QuestionAnswerResponseDTO> toResponseDTOList(List<QuestionAnswer> entities);
     List<QuestionAnswer> toEntityList(List<QuestionAnswerResponseDTO> requestDTOs);
 
-    void updateEntityFromRequest(QuestionAnswerRequestDTO questionAnswerRequestDTO,@MappingTarget QuestionAnswer questionAnswer);
 }

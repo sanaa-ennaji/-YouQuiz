@@ -42,8 +42,8 @@ public class QuestionController {
 
     @GetMapping
     public ResponseEntity<List<QuestionResponseDTO>> findAll() {
-        List<QuestionResponseDTO> quizzes = questionService.findAll();
-        return ResponseEntity.ok(quizzes);
+        List<QuestionResponseDTO> questions = questionService.findAll();
+        return ResponseEntity.ok(questions);
     }
 
     @DeleteMapping("/{id}")

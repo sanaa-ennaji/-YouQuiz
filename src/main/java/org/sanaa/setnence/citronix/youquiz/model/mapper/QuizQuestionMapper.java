@@ -4,7 +4,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuizQuestionRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuizQuestionResponseDTO;
-import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
 import org.sanaa.setnence.citronix.youquiz.model.entity.QuizQuestion;
 
 import java.util.List;

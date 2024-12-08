@@ -6,7 +6,7 @@ import org.mapstruct.MappingTarget;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.TrainerRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.TrainerResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Trainer;
-import org.springframework.web.bind.annotation.Mapping;
+
 
 import java.util.List;
 

@@ -17,8 +17,8 @@ public class QuizAssignmentResponseDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     private int score;
+    private int attempts;
     private int result;
-    private List<AnswerValidationEmbeddedDTO>  answerValidationEmbeddedDTO;
     private long studentId;
     private long quizId;
 }

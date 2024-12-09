@@ -11,4 +11,5 @@ public class AnswerValidationResponseDTO {
     private Long id;
     private  int points;
     private long questionId ;
+    private long answerId;
 }

@@ -3,9 +3,7 @@ package org.sanaa.setnence.citronix.youquiz.service.impl;
 import jakarta.persistence.EntityNotFoundException;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuizAssignmentRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuizAssignmentResponseDTO;
-import org.sanaa.setnence.citronix.youquiz.model.entity.Quiz;
-import org.sanaa.setnence.citronix.youquiz.model.entity.QuizAssignment;
-import org.sanaa.setnence.citronix.youquiz.model.entity.Student;
+import org.sanaa.setnence.citronix.youquiz.model.entity.*;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.QuizAssignmentMapper;
 import org.sanaa.setnence.citronix.youquiz.repository.QuizAssignmentRepository;
 import org.sanaa.setnence.citronix.youquiz.service.interfaces.QuizAssignmentServiceI;
@@ -33,13 +31,65 @@ public class QuizAssignmentService implements QuizAssignmentServiceI {
     @Override
     public QuizAssignmentResponseDTO create(QuizAssignmentRequestDTO quizAssignmentRequestDTO) {
         Quiz quiz = quizService.findEntityById(quizAssignmentRequestDTO.getQuizId());
-     Student student = studentService.findEntityById(quizAssignmentRequestDTO.getStudentId());
-     QuizAssignment quizAssignment = quizAssignmentMapper.toEntity(quizAssignmentRequestDTO);
+        Student student = studentService.findEntityById(quizAssignmentRequestDTO.getStudentId());
+
+        int score = calculateScore(student, quiz);
+        int result = calculateResult(score, quiz.getPassingScore());
+        int attempts = calculateAttempts(student, quiz);
+
+        QuizAssignment quizAssignment = quizAssignmentMapper.toEntity(quizAssignmentRequestDTO);
         quizAssignment.setStudent(student);
         quizAssignment.setQuiz(quiz);
+        quizAssignment.setScore(score);
+        quizAssignment.setResult(result);
+        quizAssignment.setAttempts(attempts);
+
         QuizAssignment savedAssignment = quizAssignmentRepository.save(quizAssignment);
         return quizAssignmentMapper.toResponseDTO(savedAssignment);
     }
+
+
+    public int calculateScore(Student student, Quiz quiz) {
+        int score = 0;
+
+
+        List<QuizAssignment> quizAssignments = student.getQuizAssignment();
+
+        QuizAssignment quizAssignment = quizAssignments.stream()
+                .filter(assignment -> assignment.getQuiz().equals(quiz))
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("Quiz not found for student"));
+
+        List<AnswerValidation> answerValidations = quizAssignment.getAnswerValidation();
+
+        for (AnswerValidation answerValidation : answerValidations) {
+
+            if (answerValidation.getAnswer() != null && answerValidation.getAnswer().isCorrect()) {
+                score += answerValidation.getPoints();
+            }
+        }
+
+        return score;
+    }
+
+
+    public int calculateResult(int score, int passingScore) {
+        return score >= passingScore ? 1 : 0;
+    }
+
+
+    public int calculateAttempts(Student student, Quiz quiz) {
+        List<QuizAssignment> quizAssignments = student.getQuizAssignment();
+
+        long attempts = quizAssignments.stream()
+                .filter(assignment -> assignment.getQuiz().equals(quiz))
+                .count();
+
+        return (int) (attempts + 1);
+    }
+
+
+
 
     @Override
     public QuizAssignmentResponseDTO update(Long id, QuizAssignmentRequestDTO quizAssignmentRequestDTO) {

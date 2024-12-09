@@ -14,5 +14,7 @@ public class AnswerValidationRequestDTO {
     private  int points;
     @NotNull
     private long questionId;
+    @NotNull
+    private long answerId;
 
 }

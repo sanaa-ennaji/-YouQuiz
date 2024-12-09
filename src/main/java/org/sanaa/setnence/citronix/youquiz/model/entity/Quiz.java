@@ -40,4 +40,5 @@ public class Quiz {
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<QuizAssignment> quizAssignment;
+
 }

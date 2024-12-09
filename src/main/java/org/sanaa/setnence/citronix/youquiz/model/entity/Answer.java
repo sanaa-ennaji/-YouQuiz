@@ -25,4 +25,7 @@ public class Answer {
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<QuestionAnswer>  questionAnswers;
+
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
+    private List<AnswerValidation> answerValidation;
 }

@@ -24,6 +24,10 @@ public class AnswerValidation {
     private List<QuizAssignment> quizAssignment;
 
     @ManyToOne
+    @JoinColumn(name = "answer_id")
+    private Answer answer ;
+
+    @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question ;
 

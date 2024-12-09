@@ -26,4 +26,5 @@ public class QuizAssignmentRequestDTO {
     private int score ;
     @NotNull(message = "result id can't be null")
     private int result ;
+    private int attempts;
 }

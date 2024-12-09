@@ -18,7 +18,7 @@ import java.util.List;
 public class Student extends User {
 
     @Column(nullable = false, updatable = false)
-    private LocalDate enrollmentDate;
+    private LocalDate enrollmentDate = LocalDate.now();
 
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)

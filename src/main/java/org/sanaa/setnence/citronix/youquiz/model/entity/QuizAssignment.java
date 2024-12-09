@@ -25,7 +25,7 @@ public class QuizAssignment {
 
     @NotNull
     private LocalDate endDate;
-    private int attempts;
+    private int attempts = 0;
     private int score;
 
     private int result;

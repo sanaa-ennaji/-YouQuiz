@@ -1,6 +1,7 @@
 package org.sanaa.setnence.citronix.youquiz.model.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.AnswerValidationRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.AnswerValidationResponseDTO;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {AnswerMapper.class})
 public interface AnswerValidationMapper {
+    @Mapping(target = "questionId", source = "question.id")
     AnswerValidationResponseDTO toResponseDTO(AnswerValidation entity);
     AnswerValidation toEntity (AnswerValidationRequestDTO requestDTO);
     List<AnswerValidationResponseDTO> toResponseDTOList(List<AnswerValidation> entities);

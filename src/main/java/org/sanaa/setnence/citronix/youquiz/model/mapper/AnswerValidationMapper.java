@@ -14,6 +14,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {AnswerMapper.class})
 public interface AnswerValidationMapper {
     @Mapping(target = "questionId", source = "question.id")
+    @Mapping(target = "answerId", source = "answer.id")
     AnswerValidationResponseDTO toResponseDTO(AnswerValidation entity);
     AnswerValidation toEntity (AnswerValidationRequestDTO requestDTO);
     List<AnswerValidationResponseDTO> toResponseDTOList(List<AnswerValidation> entities);

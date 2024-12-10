@@ -67,4 +67,10 @@ public class QuestionAnswerService implements QuestionAnswerServiceI {
         }
         questionAnswerRepository.deleteById(id);
     }
+
+    public QuestionAnswer findQuestionAnswerByQuestionAndAnswer(Long questionId, Long answerId) {
+        return questionAnswerRepository.findByQuestionIdAndAnswerId(questionId, answerId)
+                .orElseThrow(() -> new IllegalArgumentException("No matching QuestionAnswer found for the provided question and answer IDs."));
+    }
+
 }

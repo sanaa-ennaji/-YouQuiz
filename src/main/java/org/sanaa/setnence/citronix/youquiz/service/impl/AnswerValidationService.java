@@ -5,6 +5,7 @@ import org.sanaa.setnence.citronix.youquiz.model.dto.request.AnswerValidationReq
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.AnswerValidationResponseDTO;
 import org.sanaa.setnence.citronix.youquiz.model.entity.AnswerValidation;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Question;
+import org.sanaa.setnence.citronix.youquiz.model.entity.QuestionAnswer;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.AnswerValidationMapper;
 import org.sanaa.setnence.citronix.youquiz.repository.AnswerValidationRepository;
 import org.sanaa.setnence.citronix.youquiz.service.interfaces.AnsweValidationServiceI;
@@ -27,15 +28,29 @@ public class AnswerValidationService implements AnsweValidationServiceI {
 
     @Override
     public AnswerValidationResponseDTO create(AnswerValidationRequestDTO answerValidationRequestDTO) {
-        Question question= questionService.findEntityById(answerValidationRequestDTO.getQuestionId());
+        // Fetch the question using its ID
+        Question question = questionService.findEntityById(answerValidationRequestDTO.getQuestionId());
 
+        // Retrieve the QuestionAnswer entry based on the question and answer
+        QuestionAnswer questionAnswer = questionService.findQuestionAnswerByQuestionAndAnswer(
+                answerValidationRequestDTO.getQuestionId(),
+                answerValidationRequestDTO.getAnswerId()
+        );
 
+        if (questionAnswer == null) {
+            throw new IllegalArgumentException("Invalid question or answer. No matching QuestionAnswer found.");
+        }
+
+        // Map the request DTO to the entity
         AnswerValidation answerValidation = answerValidationMapper.toEntity(answerValidationRequestDTO);
-        answerValidation.setQuestion(question);
 
+        // Set the question
+        answerValidation.setQuestion(question);
+        answerValidation.setPoints(questionAnswer.get);
         AnswerValidation savedAnswerValidation = answerValidationRepository.save(answerValidation);
-        return  answerValidationMapper.toResponseDTO(savedAnswerValidation);
+        return answerValidationMapper.toResponseDTO(savedAnswerValidation);
     }
+
 
     @Override
     public AnswerValidationResponseDTO update(Long id, AnswerValidationRequestDTO answerValidationRequestDTO) {

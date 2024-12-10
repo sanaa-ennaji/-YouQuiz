@@ -1,11 +1,13 @@
 package org.sanaa.setnence.citronix.youquiz.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.constraints.NotNull;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuestionRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuestionResponseDTO;
 
 import org.sanaa.setnence.citronix.youquiz.model.entity.Level;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Question;
+import org.sanaa.setnence.citronix.youquiz.model.entity.QuestionAnswer;
 import org.sanaa.setnence.citronix.youquiz.model.entity.Subject;
 import org.sanaa.setnence.citronix.youquiz.model.mapper.QuestionMapper;
 import org.sanaa.setnence.citronix.youquiz.repository.QuestionRepository;
@@ -77,4 +79,5 @@ public class QuestionService implements QuestionServiceI {
         return questionRepository.findById(id)
                 .orElseThrow(()-> new EntityNotFoundException("question not found with id "+ id));
     }
+
 }

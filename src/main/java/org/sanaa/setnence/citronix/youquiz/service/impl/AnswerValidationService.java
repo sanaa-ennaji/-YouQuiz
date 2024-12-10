@@ -19,34 +19,26 @@ public class AnswerValidationService implements AnsweValidationServiceI {
     private final AnswerValidationRepository  answerValidationRepository;
     private final AnswerValidationMapper answerValidationMapper;
     private final QuestionService questionService;
+    private final QuestionAnswerService questionAnswerService;
 
-    public AnswerValidationService(AnswerValidationRepository answerValidationRepository, AnswerValidationMapper answerValidationMapper, QuestionService questionService) {
+    public AnswerValidationService(AnswerValidationRepository answerValidationRepository, AnswerValidationMapper answerValidationMapper, QuestionService questionService, QuestionAnswerService questionAnswerService) {
         this.answerValidationRepository = answerValidationRepository;
         this.answerValidationMapper = answerValidationMapper;
         this.questionService = questionService;
+        this.questionAnswerService = questionAnswerService;
     }
 
     @Override
     public AnswerValidationResponseDTO create(AnswerValidationRequestDTO answerValidationRequestDTO) {
-        // Fetch the question using its ID
         Question question = questionService.findEntityById(answerValidationRequestDTO.getQuestionId());
-
-        // Retrieve the QuestionAnswer entry based on the question and answer
-        QuestionAnswer questionAnswer = questionService.findQuestionAnswerByQuestionAndAnswer(
+        QuestionAnswer questionAnswer = questionAnswerService.findAnswer(
                 answerValidationRequestDTO.getQuestionId(),
                 answerValidationRequestDTO.getAnswerId()
         );
-
-        if (questionAnswer == null) {
-            throw new IllegalArgumentException("Invalid question or answer. No matching QuestionAnswer found.");
-        }
-
-        // Map the request DTO to the entity
         AnswerValidation answerValidation = answerValidationMapper.toEntity(answerValidationRequestDTO);
-
-        // Set the question
         answerValidation.setQuestion(question);
-        answerValidation.setPoints(questionAnswer.get);
+        answerValidation.setAnswer(questionAnswer.getAnswer());
+        answerValidation.setPoints(questionAnswer.getPoints());
         AnswerValidation savedAnswerValidation = answerValidationRepository.save(answerValidation);
         return answerValidationMapper.toResponseDTO(savedAnswerValidation);
     }

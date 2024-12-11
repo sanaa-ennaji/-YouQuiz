@@ -15,81 +15,40 @@ import java.util.Optional;
 @Service
 public class QuizAssignmentService implements QuizAssignmentServiceI {
 
-    private final QuizAssignmentRepository quizAssignmentRepository ;
-    private final QuizAssignmentMapper quizAssignmentMapper;
-    private final StudentService studentService;
     private final QuizService quizService;
+    private final StudentService studentService;
+    private final QuizAssignmentMapper quizAssignmentMapper;
+    private final QuizAssignmentRepository quizAssignmentRepository;
 
-    public QuizAssignmentService(QuizAssignmentRepository quizAssignmentRepository, QuizAssignmentMapper quizAssignmentMapper, StudentService studentService, QuizService quizService) {
-        this.quizAssignmentRepository = quizAssignmentRepository;
-        this.quizAssignmentMapper = quizAssignmentMapper;
-        this.studentService = studentService;
+    public QuizAssignmentService(QuizService quizService, StudentService studentService, QuizAssignmentMapper quizAssignmentMapper, QuizAssignmentRepository quizAssignmentRepository) {
         this.quizService = quizService;
+        this.studentService = studentService;
+        this.quizAssignmentMapper = quizAssignmentMapper;
+        this.quizAssignmentRepository = quizAssignmentRepository;
     }
-
 
     @Override
     public QuizAssignmentResponseDTO create(QuizAssignmentRequestDTO quizAssignmentRequestDTO) {
         Quiz quiz = quizService.findEntityById(quizAssignmentRequestDTO.getQuizId());
         Student student = studentService.findEntityById(quizAssignmentRequestDTO.getStudentId());
-
-        int score = calculateScore(student, quiz);
-        int result = calculateResult(score, quiz.getPassingScore());
-        int attempts = calculateAttempts(student, quiz);
-
         QuizAssignment quizAssignment = quizAssignmentMapper.toEntity(quizAssignmentRequestDTO);
-        quizAssignment.setStudent(student);
         quizAssignment.setQuiz(quiz);
-        quizAssignment.setScore(score);
-        quizAssignment.setResult(result);
-        quizAssignment.setAttempts(attempts);
+        quizAssignment.setStudent(student);
+        quizAssignment.setAttempts(1);
+        quizAssignment.setScore(0);
+        quizAssignment.setResult(0);
 
-        QuizAssignment savedAssignment = quizAssignmentRepository.save(quizAssignment);
-        return quizAssignmentMapper.toResponseDTO(savedAssignment);
+        return quizAssignmentMapper.toResponseDTO(quizAssignmentRepository.save(quizAssignment));
     }
 
+    public QuizAssignment addAnswerValidation(Long quizAssignmentId, AnswerValidation answerValidation) {
+        QuizAssignment quizAssignment = quizAssignmentRepository.findById(quizAssignmentId)
+                .orElseThrow(() -> new EntityNotFoundException("QuizAssignment not found"));
 
-    public int calculateScore(Student student, Quiz quiz) {
-        int score = 0;
-
-
-        List<QuizAssignment> quizAssignments = student.getQuizAssignment();
-
-        QuizAssignment quizAssignment = quizAssignments.stream()
-                .filter(assignment -> assignment.getQuiz().equals(quiz))
-                .findFirst()
-                .orElseThrow(() -> new EntityNotFoundException("Quiz not found for student"));
-
-        List<AnswerValidation> answerValidations = quizAssignment.getAnswerValidation();
-
-        for (AnswerValidation answerValidation : answerValidations) {
-
-            if (answerValidation.getAnswer() != null && answerValidation.getAnswer().isCorrect()) {
-                score += answerValidation.getPoints();
-            }
-        }
-
-        return score;
+        quizAssignment.getAnswerValidation().add(answerValidation);
+        quizAssignment.setScore(quizAssignment.getScore() + answerValidation.getPoints());
+        return quizAssignmentRepository.save(quizAssignment);
     }
-
-
-    public int calculateResult(int score, int passingScore) {
-        return score >= passingScore ? 1 : 0;
-    }
-
-
-    public int calculateAttempts(Student student, Quiz quiz) {
-        List<QuizAssignment> quizAssignments = student.getQuizAssignment();
-
-        long attempts = quizAssignments.stream()
-                .filter(assignment -> assignment.getQuiz().equals(quiz))
-                .count();
-
-        return (int) (attempts + 1);
-    }
-
-
-
 
     @Override
     public QuizAssignmentResponseDTO update(Long id, QuizAssignmentRequestDTO quizAssignmentRequestDTO) {

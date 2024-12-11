@@ -16,33 +16,41 @@ import java.util.Optional;
 
 @Service
 public class AnswerValidationService implements AnsweValidationServiceI {
-    private final AnswerValidationRepository  answerValidationRepository;
-    private final AnswerValidationMapper answerValidationMapper;
-    private final QuestionService questionService;
-    private final QuestionAnswerService questionAnswerService;
 
-    public AnswerValidationService(AnswerValidationRepository answerValidationRepository, AnswerValidationMapper answerValidationMapper, QuestionService questionService, QuestionAnswerService questionAnswerService) {
-        this.answerValidationRepository = answerValidationRepository;
-        this.answerValidationMapper = answerValidationMapper;
-        this.questionService = questionService;
-        this.questionAnswerService = questionAnswerService;
-    }
+        private final AnswerValidationMapper answerValidationMapper;
+        private final QuestionService questionService;
+        private final QuestionAnswerService questionAnswerService;
+        private final QuizAssignmentService quizAssignmentService;
+        private final AnswerValidationRepository answerValidationRepository;
 
-    @Override
-    public AnswerValidationResponseDTO create(AnswerValidationRequestDTO answerValidationRequestDTO) {
-        Question question = questionService.findEntityById(answerValidationRequestDTO.getQuestionId());
-        QuestionAnswer questionAnswer = questionAnswerService.findAnswer(
-                answerValidationRequestDTO.getQuestionId(),
-                answerValidationRequestDTO.getAnswerId()
-        );
-        AnswerValidation answerValidation = answerValidationMapper.toEntity(answerValidationRequestDTO);
-        answerValidation.setQuestion(question);
-        answerValidation.setAnswer(questionAnswer.getAnswer());
-        answerValidation.setPoints(questionAnswer.getPoints());
-        AnswerValidation savedAnswerValidation = answerValidationRepository.save(answerValidation);
-        return answerValidationMapper.toResponseDTO(savedAnswerValidation);
-    }
+        public AnswerValidationService(AnswerValidationMapper answerValidationMapper, QuestionService questionService,
+                                       QuestionAnswerService questionAnswerService, QuizAssignmentService quizAssignmentService, AnswerValidationRepository answerValidationRepository) {
+            this.answerValidationMapper = answerValidationMapper;
+            this.questionService = questionService;
+            this.questionAnswerService = questionAnswerService;
+            this.quizAssignmentService = quizAssignmentService;
+            this.answerValidationRepository = answerValidationRepository;
+        }
 
+        @Override
+        public AnswerValidationResponseDTO create(AnswerValidationRequestDTO answerValidationRequestDTO) {
+            Question question = questionService.findEntityById(answerValidationRequestDTO.getQuestionId());
+            QuestionAnswer questionAnswer = questionAnswerService.findAnswer(
+                    answerValidationRequestDTO.getQuestionId(),
+                    answerValidationRequestDTO.getAnswerId()
+            );
+
+
+            AnswerValidation answerValidation = answerValidationMapper.toEntity(answerValidationRequestDTO);
+            answerValidation.setQuestion(question);
+            answerValidation.setAnswer(questionAnswer.getAnswer());
+            answerValidation.setPoints(questionAnswer.getPoints());
+
+            Long quizAssignmentId = answerValidationRequestDTO.getQuizAssignmentId();
+            quizAssignmentService.addAnswerValidation(quizAssignmentId, answerValidation);
+
+            return answerValidationMapper.toResponseDTO(answerValidationRepository.save(answerValidation));
+        }
 
     @Override
     public AnswerValidationResponseDTO update(Long id, AnswerValidationRequestDTO answerValidationRequestDTO) {

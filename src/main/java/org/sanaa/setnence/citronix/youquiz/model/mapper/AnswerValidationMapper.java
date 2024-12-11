@@ -19,6 +19,5 @@ public interface AnswerValidationMapper {
     AnswerValidation toEntity (AnswerValidationRequestDTO requestDTO);
     List<AnswerValidationResponseDTO> toResponseDTOList(List<AnswerValidation> entities);
     List<AnswerValidation> toEntityList(List<AnswerValidationResponseDTO> requestDTOs);
-
     void updateEntityFromRequest(AnswerValidationRequestDTO answerValidationRequestDTO,@MappingTarget AnswerValidation answerValidation);
 }

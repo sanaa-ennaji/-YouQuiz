@@ -1,6 +1,7 @@
 package org.sanaa.setnence.citronix.youquiz.model.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.sanaa.setnence.citronix.youquiz.model.dto.request.QuizQuestionRequestDTO;
 import org.sanaa.setnence.citronix.youquiz.model.dto.response.QuizQuestionResponseDTO;
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring" )
 public interface QuizQuestionMapper {
+    @Mapping(target = "quizId", source = "quiz.id")
+    @Mapping(target = "questionId", source = "question.id")
     QuizQuestionResponseDTO toResponseDTO(QuizQuestion entity);
     QuizQuestion toEntity (QuizQuestionRequestDTO requestDTO);
     List<QuizQuestionResponseDTO> toResponseDTOList(List<QuizQuestion> entities);

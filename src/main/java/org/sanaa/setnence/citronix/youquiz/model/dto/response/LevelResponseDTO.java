@@ -16,5 +16,4 @@ public class LevelResponseDTO {
     private int minPoints;
     private int maxPoints;
     private List<QuestionEmbeddedDTO> questionEmbeddedDTO;
-
 }

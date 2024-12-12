@@ -30,12 +30,7 @@ public class QuizAssignment {
 
     private int result;
 
-    @ManyToMany
-    @JoinTable(
-            name = "quiz_assignment_answer_validation",
-            joinColumns = @JoinColumn(name = "quiz_assignment_id"),
-            inverseJoinColumns = @JoinColumn(name = "answer_validation_id")
-    )
+    @OneToMany
     private List<AnswerValidation> answerValidation;
 
     @ManyToOne

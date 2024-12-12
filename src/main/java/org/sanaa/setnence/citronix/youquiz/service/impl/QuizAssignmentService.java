@@ -41,14 +41,16 @@ public class QuizAssignmentService implements QuizAssignmentServiceI {
         return quizAssignmentMapper.toResponseDTO(quizAssignmentRepository.save(quizAssignment));
     }
 
-    public QuizAssignment addAnswerValidation(Long quizAssignmentId, AnswerValidation answerValidation) {
+    public void addAnswerValidation(Long quizAssignmentId, AnswerValidation answerValidation) {
         QuizAssignment quizAssignment = quizAssignmentRepository.findById(quizAssignmentId)
                 .orElseThrow(() -> new EntityNotFoundException("QuizAssignment not found"));
 
         quizAssignment.getAnswerValidation().add(answerValidation);
         quizAssignment.setScore(quizAssignment.getScore() + answerValidation.getPoints());
-        return quizAssignmentRepository.save(quizAssignment);
     }
+
+
+
 
     @Override
     public QuizAssignmentResponseDTO update(Long id, QuizAssignmentRequestDTO quizAssignmentRequestDTO) {
@@ -80,4 +82,9 @@ public class QuizAssignmentService implements QuizAssignmentServiceI {
         }
      quizAssignmentRepository.deleteById(id);
     }
+    public QuizAssignment findEntityById(Long id) {
+        return quizAssignmentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("QuizAssignment not found for id: " + id));
+    }
+
 }

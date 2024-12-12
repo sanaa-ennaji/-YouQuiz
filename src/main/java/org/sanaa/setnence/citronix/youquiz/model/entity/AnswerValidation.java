@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.sanaa.setnence.citronix.youquiz.model.dto.request.AnswerValidationRequestDTO;
 
 
 import java.util.List;
@@ -20,8 +19,9 @@ public class AnswerValidation {
     private Long id;
     private  int points;
 
-    @ManyToMany(mappedBy = "answerValidation")
-    private List<QuizAssignment> quizAssignment;
+    @ManyToOne
+    @JoinColumn(name = "quiz_assignment_id", nullable = false)
+    private QuizAssignment quizAssignment;
 
     @ManyToOne
     @JoinColumn(name = "answer_id")

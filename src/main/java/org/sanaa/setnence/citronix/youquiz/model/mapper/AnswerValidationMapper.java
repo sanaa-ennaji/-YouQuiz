@@ -15,9 +15,15 @@ import java.util.List;
 public interface AnswerValidationMapper {
     @Mapping(target = "questionId", source = "question.id")
     @Mapping(target = "answerId", source = "answer.id")
-    AnswerValidationResponseDTO toResponseDTO(AnswerValidation entity);
-    AnswerValidation toEntity (AnswerValidationRequestDTO requestDTO);
+    @Mapping(target = "quizAssignmentId", source = "quizAssignment.id")
+    AnswerValidationResponseDTO toResponseDTO(AnswerValidation answerValidation);
+
+    AnswerValidation toEntity(AnswerValidationRequestDTO requestDTO);
+
     List<AnswerValidationResponseDTO> toResponseDTOList(List<AnswerValidation> entities);
+
     List<AnswerValidation> toEntityList(List<AnswerValidationResponseDTO> requestDTOs);
-    void updateEntityFromRequest(AnswerValidationRequestDTO answerValidationRequestDTO,@MappingTarget AnswerValidation answerValidation);
+
+    void updateEntityFromRequest(AnswerValidationRequestDTO answerValidationRequestDTO, @MappingTarget AnswerValidation answerValidation);
 }
+

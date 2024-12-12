@@ -20,7 +20,7 @@ public class AnswerValidation {
     private  int points;
 
     @ManyToOne
-    @JoinColumn(name = "quiz_assignment_id", nullable = false)
+    @JoinColumn(name = "quiz_assignment_id")
     private QuizAssignment quizAssignment;
 
     @ManyToOne
@@ -30,5 +30,6 @@ public class AnswerValidation {
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question ;
+
 
 }

@@ -82,9 +82,26 @@ public class QuizAssignmentService implements QuizAssignmentServiceI {
         }
      quizAssignmentRepository.deleteById(id);
     }
+
     public QuizAssignment findEntityById(Long id) {
         return quizAssignmentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("QuizAssignment not found for id: " + id));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void save(QuizAssignment quizAssignment) {
+        quizAssignmentRepository.save(quizAssignment);
     }
 
 }

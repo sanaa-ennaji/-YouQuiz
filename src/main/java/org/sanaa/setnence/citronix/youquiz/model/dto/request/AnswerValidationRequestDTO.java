@@ -16,6 +16,6 @@ public class AnswerValidationRequestDTO {
     private long questionId;
     @NotNull
     private long answerId;
-    private Long quizAssignmentId;
+    private long quizAssignmentId;
 
 }

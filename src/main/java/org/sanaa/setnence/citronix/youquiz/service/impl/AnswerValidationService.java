@@ -45,18 +45,22 @@ public class AnswerValidationService implements AnsweValidationServiceI {
                 answerValidationRequestDTO.getQuestionId(),
                 answerValidationRequestDTO.getAnswerId()
         );
-
         AnswerValidation answerValidation = answerValidationMapper.toEntity(answerValidationRequestDTO);
         answerValidation.setQuestion(question);
         answerValidation.setAnswer(questionAnswer.getAnswer());
         answerValidation.setPoints(questionAnswer.getPoints());
-
         Long quizAssignmentId = answerValidationRequestDTO.getQuizAssignmentId();
-        quizAssignmentService.addAnswerValidation(quizAssignmentId, answerValidation);
+        QuizAssignment quizAssignment = quizAssignmentService.findEntityById(quizAssignmentId);
+        if (quizAssignment == null) {
+            throw new EntityNotFoundException("QuizAssignment not found with id: " + quizAssignmentId);
+        }
+        answerValidation.setQuizAssignment(quizAssignment);
+        answerValidation = answerValidationRepository.save(answerValidation);
+        quizAssignment.setScore(quizAssignment.getScore() + answerValidation.getPoints());
+        quizAssignmentService.save(quizAssignment);
 
-        return answerValidationMapper.toResponseDTO(answerValidationRepository.save(answerValidation));
+        return answerValidationMapper.toResponseDTO(answerValidation);
     }
-
 
 
     @Override

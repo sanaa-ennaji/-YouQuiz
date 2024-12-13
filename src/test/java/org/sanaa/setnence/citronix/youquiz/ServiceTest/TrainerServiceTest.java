@@ -1,0 +1,103 @@
+package org.sanaa.setnence.citronix.youquiz.ServiceTest;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.sanaa.setnence.citronix.youquiz.model.dto.request.TrainerRequestDTO;
+import org.sanaa.setnence.citronix.youquiz.model.dto.response.TrainerResponseDTO;
+import org.sanaa.setnence.citronix.youquiz.model.entity.Trainer;
+import org.sanaa.setnence.citronix.youquiz.model.mapper.TrainerMapper;
+import org.sanaa.setnence.citronix.youquiz.repository.TrainerRepository;
+import org.sanaa.setnence.citronix.youquiz.service.impl.TrainerService;
+
+import java.time.LocalDate;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
+public class TrainerServiceTest {
+
+    @Mock
+    private TrainerRepository trainerRepository;
+    @Mock
+    private TrainerMapper trainerMapper;
+
+    @InjectMocks
+    private TrainerService trainerService;
+
+    private TrainerRequestDTO trainerRequestDTO;
+    private Trainer trainer;
+    private TrainerResponseDTO trainerResponseDTO;
+
+    @BeforeEach
+    public void setUp() {
+
+        trainerRequestDTO = new TrainerRequestDTO();
+        trainerRequestDTO.setFirstName("John");
+        trainerRequestDTO.setLastName("Doe");
+        trainerRequestDTO.setBirthDate(LocalDate.of(1990, 5, 15));
+        trainerRequestDTO.setAddress("123 Trainer Street");
+        trainerRequestDTO.setSpecialty("Fitness");
+
+        trainer = new Trainer();
+        trainer.setFirstName("John");
+        trainer.setLastName("Doe");
+        trainer.setBirthDate(LocalDate.of(1990, 5, 15));
+        trainer.setAddress("123 Trainer Street");
+        trainer.setSpecialty("Fitness");
+
+        trainerResponseDTO = new TrainerResponseDTO();
+        trainerResponseDTO.setId(1L);
+        trainerResponseDTO.setFirstName("John");
+        trainerResponseDTO.setLastName("Doe");
+        trainerResponseDTO.setBirthDate(LocalDate.of(1990, 5, 15));
+        trainerResponseDTO.setAddress("123 Trainer Street");
+        trainerResponseDTO.setSpecialty("Fitness");
+    }
+
+    @Test
+    public void shouldCreateTrainerSuccessfully() {
+
+        when(trainerMapper.toEntity(any(TrainerRequestDTO.class))).thenReturn(trainer);
+        when(trainerRepository.save(any(Trainer.class))).thenReturn(trainer);
+        when(trainerMapper.toResponseDTO(any(Trainer.class))).thenReturn(trainerResponseDTO);
+
+
+        TrainerResponseDTO result = trainerService.create(trainerRequestDTO);
+
+        assertThat(result).isNotNull();
+        assertThat(result.getFirstName()).isEqualTo("John");
+        assertThat(result.getLastName()).isEqualTo("Doe");
+        assertThat(result.getSpecialty()).isEqualTo("Fitness");
+
+        verify(trainerMapper, times(1)).toEntity(any(TrainerRequestDTO.class));
+        verify(trainerRepository, times(1)).save(any(Trainer.class));
+        verify(trainerMapper, times(1)).toResponseDTO(any(Trainer.class));
+    }
+
+    //shouldHandleCreationError
+    @Test
+    public void shouldHandleCreationError() {
+        when(trainerMapper.toEntity(any(TrainerRequestDTO.class))).thenReturn(trainer);
+        when(trainerRepository.save(any(Trainer.class))).thenThrow(new RuntimeException("Database error"));
+
+        try {
+            trainerService.create(trainerRequestDTO);
+        } catch (Exception e) {
+            assertThat(e).isInstanceOf(RuntimeException.class);
+            assertThat(e.getMessage()).isEqualTo("Database error");
+        }
+
+        verify(trainerMapper, times(1)).toEntity(any(TrainerRequestDTO.class));
+        verify(trainerRepository, times(1)).save(any(Trainer.class));
+    }
+}
+
+

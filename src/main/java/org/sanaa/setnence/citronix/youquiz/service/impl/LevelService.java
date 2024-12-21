@@ -27,7 +27,6 @@ public class LevelService implements LevelServiceI {
     public LevelResponseDTO create(LevelRequestDTO levelRequestDTO) {
 
         Level level = levelMapper.toEntity(levelRequestDTO);
-
         Level savedLevel = levelRepository.save(level);
         return  levelMapper.toResponseDTO(savedLevel);
     }

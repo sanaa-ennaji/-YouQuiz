@@ -36,7 +36,12 @@ public class QuizAssignmentService implements QuizAssignmentServiceI {
         quizAssignment.setStudent(student);
         quizAssignment.setAttempts(1);
         quizAssignment.setScore(0);
-        quizAssignment.setResult(0);
+        int passingScore = quizAssignment.getQuiz().getPassingScore();
+        if (quizAssignment.getScore() >= passingScore) {
+            quizAssignment.setResult(1);
+        } else {
+            quizAssignment.setResult(0);
+        }
 
         return quizAssignmentMapper.toResponseDTO(quizAssignmentRepository.save(quizAssignment));
     }
